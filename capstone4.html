@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chatter Art Connect - Messages</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0; padding: 0; background:#f0f2f5;
+    display: flex; flex-direction: row; min-height: 100vh; overflow: hidden;
+  }
+  #sidebar {
+    width: 260px;
+    background: white;
+    padding: 20px 14px 0;
+    border-right: 1px solid #dde3ea;
+    height: 100vh;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-nav { list-style: none; padding: 0; margin: 0; }
+  .sidebar-nav li { margin: 18px 0; }
+  .sidebar-link-btn {
+    display: flex; align-items: center; gap: 13px;
+    text-decoration: none; color: #2851cb;
+    font-weight: bold; font-size: 1.06em;
+    background: #f4f8ff; border-radius: 18px;
+    padding: 12px 18px; border: none;
+    transition: background 0.17s, color 0.15s, box-shadow 0.18s;
+    box-shadow: 0 1px 6px #afc1ff18;
+    cursor: pointer;
+  }
+  .sidebar-link-btn:hover,
+  .sidebar-link-btn.active {
+    background: linear-gradient(95deg, #5090f6 65%, #8F60E6 130%);
+    color: #fff;
+    box-shadow: 0 4px 20px #6387f23e;
+    text-decoration: none;
+  }
+  .sidebar-icon { font-size: 1.3em; width: 23px; text-align: center; }
+  .badge {
+    background: #afc1ff;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.85em;
+    margin-left: 6px;
+    color: #3357A0;
+  }
+
+  #messages-main-content {
+    flex-grow: 1;
+    background: white;
+    padding: 0 30px;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .messages-header {
+    font-size: 2em;
+    font-weight: bold;
+    padding: 28px 0 10px 0;
+    letter-spacing: 1px;
+  }
+  .chat-thread-row {
+    display: flex; gap: 18px;
+    margin-bottom: 20px; overflow-x: auto;
+  }
+  .chat-thread-btn {
+    padding: 10px 17px; border-radius: 18px; border: none;
+    outline: none; background: #f5f5f7; font-size: 1em;
+    font-weight: 600; color: #333; cursor: pointer;
+    transition: background 0.18s, color 0.18s; white-space: nowrap;
+  }
+  .chat-thread-btn.selected,
+  .chat-thread-btn:hover {
+    background: #1DA1F2; color: white;
+  }
+  .chat-list-container {
+    background: #f9fafc; border-radius: 18px;
+    box-shadow: 0 2px 6px #ececec40;
+    border: 1px solid #eee;
+    padding: 16px; margin-bottom: 20px; flex-grow: 1; overflow-y: auto;
+  }
+  .chat-list-title { font-size: 1.13em; font-weight: bold; margin-bottom: 15px; }
+  .chat-list-ul { list-style: none; padding: 0; margin: 0; }
+  .chat-list-item {
+    display: flex; align-items: center; gap: 13px; padding: 12px;
+    border-radius: 12px; transition: background 0.18s;
+    cursor: pointer; font-size: 1.08em; font-weight: 500; margin-bottom: 8px;
+  }
+  .chat-list-item:hover { background: #e8f6fd; }
+  .chat-avatar {
+    width: 33px; height: 33px; border-radius: 50%;
+    background: #ececec;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.15em; flex-shrink: 0;
+  }
+  .last-seen {
+    font-size: 0.98em; color: #858787;
+    font-style: italic; margin-left: auto;
+  }
+  #right-sidebar {
+    width: 320px; background: white;
+    padding: 10px; height: 100vh; overflow-y: auto;
+    box-sizing: border-box; flex-shrink: 0;
+    border-left: 1px solid #dde3ea;
+  }
+  .news-item, .recommendation {
+    padding: 10px 0; border-bottom: 1px solid #eee;
+  }
+</style>
+</head>
+<body>
+  <div id="sidebar">
+    <div style="margin-bottom:10px;"><img src="logo.png" alt="Chatter Art Connect Logo" style="width:100%;"/></div>
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a class="sidebar-link-btn" href="home.html"><span class="sidebar-icon">🏠</span> Home</a></li>
+        <li><a class="sidebar-link-btn" href="explore.html"><span class="sidebar-icon">🔍</span> Explore</a></li>
+        <li><a class="sidebar-link-btn" href="notifications.html"><span class="sidebar-icon">🔔</span> Notifications <span class="badge">3</span></a></li>
+        <li><a class="sidebar-link-btn active" href="messages.html"><span class="sidebar-icon">💬</span> Messages <span class="badge">2</span></a></li>
+        <li><a class="sidebar-link-btn" href="community.html"><span class="sidebar-icon">🌐</span> Community & Collage</a></li>
+        <li><a class="sidebar-link-btn" href="profile.html"><span class="sidebar-icon">👤</span> Profile</a></li>
+        <li><a class="sidebar-link-btn" href="settings.html"><span class="sidebar-icon">⚙️</span> Settings</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="messages-main-content">
+    <div class="messages-header">Messages</div>
+    <div class="chat-thread-row">
+      <button class="chat-thread-btn selected">Followers</button>
+      <button class="chat-thread-btn">Following</button>
+    </div>
+    <div class="chat-list-container">
+      <div class="chat-list-title">Chats</div>
+      <ul class="chat-list-ul">
+        <li class="chat-list-item">
+          <span class="chat-avatar">A</span>
+          <span>Artist123</span>
+          <span class="last-seen">Last seen 20 min ago</span>
+        </li>
+        <li class="chat-list-item">
+          <span class="chat-avatar">C</span>
+          <span>CreativeSoul</span>
+          <span class="last-seen">Last seen 2 hours ago</span>
+        </li>
+        <li class="chat-list-item">
+          <span class="chat-avatar">M</span>
+          <span>MuseDreamer</span>
+          <span class="last-seen">Online</span>
+        </li>
+        <!-- More usernames as needed -->
+      </ul>
+    </div>
+  </div>
+
+  <div id="right-sidebar">
+    <div class="news-item">
+      <h4>News You Might Like</h4>
+      <p>Latest art exhibition announced.</p>
+      <p>Creative trends: "Dreamscapes" art style surges this week.</p>
+    </div>
+    <div class="recommendation">
+      <h4>People You Might Follow</h4>
+      <p>Artist123 <span class="badge">Trending</span></p>
+      <p>CreativeSoul <span class="badge">Storyteller</span></p>
+      <p>PollMaster <span class="badge">Community Lead</span></p>
+    </div>
+    <div style="margin-top:20px;">
+      <b>Feed Filters:</b>
+      <select>
+        <option>Trending</option>
+        <option>My Interests</option>
+        <option>Nearby Creators</option>
+      </select>
+    </div>
+  </div>
+</body>
+</html>
+
+
