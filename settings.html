@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chatter Art Connect — Settings</title>
+<title>Settings</title>
 <link href="https://fonts.googleapis.com/css?family=Soria:400,700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css?family=Manrope:400,700&display=swap" rel="stylesheet"/>
 <style>
@@ -343,14 +343,28 @@ body {
   box-shadow: 0 10px 22px #48267366;
   transform: scale(1.05);
 }
-@media (max-width: 1150px) {
-  #right-sidebar { display: none; }
-  #settings-main-content, .settings-option-list { max-width: none;}
-  .logout-bottom-btn {
-    right: 16px;
-    bottom: 16px;
-    padding: 11px 18px;
-    font-size: 1em;
+ @media (max-width: 600px) {
+  #navbar {
+    display: none !important;
+  }
+  #right-sidebar {
+    display: none !important;
+  }
+  #main-content {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+  }
+  #container {
+    flex-direction: column;
+    padding-top: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+  }
+  body {
+    padding-top: 0 !important;
   }
 }
 </style>
@@ -375,7 +389,7 @@ body {
   </div>
   <div id="container">
     <div id="settings-main-content">
-      <div class="settings-header">Settings</div>
+      <div class="settings-header"></div>
       <div class="settings-search-bar">
         <input type="text" placeholder="Search Settings">
       </div>
@@ -391,13 +405,7 @@ body {
         <li class="settings-option">Help Center</li>
         <li class="settings-option">Additional Resources</li>
       </ul>
-      <div class="settings-panel">
-        <h3>Your Account</h3>
-        <div class="settings-action">Account Information</div>
-        <div class="settings-action">Change Password</div>
-        <div class="settings-action">Download Archives</div>
-        <div class="settings-action">Deactivate Your Account</div>
-      </div>
+      
     </div>
     <div id="right-sidebar">
       <div class="section-box">
@@ -451,6 +459,6 @@ body {
       </div>
     </div>
   </div>
-  <button class="logout-bottom-btn">Log Out</button>
+ 
 </body>
 </html>

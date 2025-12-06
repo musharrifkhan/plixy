@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatter Art Connect - Login</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Soria:400,700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Manrope:400,700&display=swap" rel="stylesheet"/>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Soria', serif;
+      min-height: 100vh;
+      background-image: url("https://t4.ftcdn.net/jpg/03/05/14/31/360_F_305143126_Bf1ibYnBMEItIjiHFvpQPKPx7VQrWmEY.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #301008;
+    }
+
+    .login-container {
+      background: rgba(246, 235, 244, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 48px 42px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(72, 38, 115, 0.25);
+      border: 1px solid rgba(221, 227, 234, 0.4);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .login-container:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 28px 80px rgba(72, 38, 115, 0.35);
+    }
+
+    .logo-section {
+      margin-bottom: 36px;
+    }
+
+    .login-logo {
+      width: 160px;
+      height: 110px;
+      margin: 0 auto 20px;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(72, 38, 115, 0.2);
+    }
+
+    .login-title {
+      font-family: 'Soria', serif;
+      font-size: 2.1em;
+      font-weight: bold;
+      color: #482673;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .login-subtitle {
+      font-family: 'Manrope', sans-serif;
+      color: #482673;
+      font-size: 1.05em;
+      opacity: 0.9;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .form-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.95em;
+      font-weight: 700;
+      color: #482673;
+      margin-bottom: 8px;
+      display: block;
+      letter-spacing: 0.3px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 16px;
+      border: 2px solid #dde3ea;
+      font-size: 1.08em;
+      font-family: 'Manrope', sans-serif;
+      color: #482673;
+      background: rgba(255, 255, 255, 0.85);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: #482673;
+      box-shadow: 0 0 0 4px rgba(72, 38, 115, 0.15);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .forgot-password {
+      display: block;
+      text-align: right;
+      margin-top: 4px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.92em;
+      color: #482673;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .forgot-password:hover {
+      color: #301008;
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #482673 0%, #6b4e9a 100%);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.12em;
+      padding: 16px 32px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Manrope', sans-serif;
+      letter-spacing: 0.6px;
+      box-shadow: 0 6px 24px rgba(72, 38, 115, 0.3);
+      transition: all 0.25s ease;
+      margin-bottom: 24px;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(72, 38, 115, 0.45);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .signup-link {
+      font-family: 'Manrope', sans-serif;
+      color: #482673;
+      font-size: 1em;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .signup-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        margin: 16px;
+        padding: 36px 28px;
+        border-radius: 20px;
+      }
+      
+      .login-logo {
+        width: 140px;
+        height: 95px;
+      }
+      
+      .login-title {
+        font-size: 1.85em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo-section">
+      <img src="plixy.png" alt="Chatter Art Connect" class="login-logo">
+      <h1 class="login-title">Welcome Back</h1>
+      <p class="login-subtitle">Sign in to continue your creative journey</p>
+    </div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label class="form-label" for="email">Email Address</label>
+        <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="login-btn">Sign In</button>
+    </form>
+
+    <p style="margin: 0; font-family: 'Manrope', sans-serif; color: #482673;">
+      Don't have an account? 
+      <a href="#" class="signup-link">Sign up here</a>
+    </p>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      if (email && password) {
+        alert('Login functionality would be implemented here!');
+      }
+    });
+    document.querySelector('.forgot-password').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Password reset functionality would be implemented here!');
+    });
+    document.querySelector('.signup-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Redirect to signup page!');
+    });
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    if (email && password) {
+      window.location.href = "home.html";  
+    } else {
+      alert("Please fill in both email and password.");
+    }
+  });
+  document.querySelector('.forgot-password').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Password reset functionality would be implemented here!');
+  });
+  document.querySelector('.signup-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Redirect to signup page!');});
+  </script>
+</body>
+</html>

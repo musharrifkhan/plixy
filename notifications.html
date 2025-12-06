@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notifications</title>
+  <link href="https://fonts.googleapis.com/css?family=Soria:400,700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Manrope:400,700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Soria', serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f2f5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #301008;
+    }
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 86px;
+      background-color: white;
+      z-index: 110;
+      box-shadow: 0 2px 10px #48267318;
+      display: flex;
+      align-items: flex-start;
+      padding: 0 34px 0 18px;
+    }
+    .navbar-content {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      max-width: 1390px;
+      margin: 0 auto;
+      position: relative;
+      height: 86px;
+    }
+    .navbar-logo {
+      font-family: 'Soria', serif;
+      font-size: 2.03em;
+      font-weight: bold;
+      color: #482673;
+      letter-spacing: 1.2px;
+      user-select: none;
+      text-align: left;
+      padding-left: 8px;
+      margin-right: 32px;
+      background: rgba(255,255,255,0.54);
+      border-radius: 8px;
+      padding-right: 14px;
+      display: flex;
+      align-items: flex-start;
+      margin-top: 0px;
+      height: 80px;
+    }
+    .navbar-logo img {
+      display: block;
+      margin-top: 1px;
+    }
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 0;
+      flex: 1;
+      padding-top: 18px;
+    }
+    .navbar-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #482673;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      font-size: 1.11em;
+      padding: 8px 14px 5px 14px;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'Manrope', sans-serif;
+      transition: color 0.15s, background 0.16s;
+      cursor: pointer;
+      height: 34px;
+    }
+    .navbar-link:hover {
+      color: #301008;
+      background: #e7dee6;
+    }
+    .navbar-link.active, .navbar-link:focus {
+      color: #301008;
+    }
+    .navbar-link::after {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 0;
+      height: 0;
+      background: #482673;
+      border-radius: 2px;
+      transition: height 0.18s, background 0.18s;
+    }
+    .navbar-link:hover::after, .navbar-link.active::after {
+      height: 3px;
+      background: #482673;
+    }
+    .badge {
+      background: #482673;
+      border-radius: 12px;
+      padding: 2px 8px;
+      font-size: 0.90em;
+      margin-left: 6px;
+      color: #fff;
+      display: inline-block;
+    }
+    #logout-btn {
+      position: absolute;
+      right: 0;
+      top: 20px;
+      background: #fff;
+      border: 2px solid #482673;
+      color: #482673;
+      font-weight: bold;
+      padding: 8px 24px;
+      border-radius: 15px;
+      font-size: 1.05em;
+      font-family: 'Manrope', sans-serif;
+      box-shadow: 0 1px 6px #ed0b7013;
+      cursor: pointer;
+      transition: background 0.19s, color 0.13s, border 0.13s;
+      z-index: 1000;
+      margin-bottom: 1px;
+    }
+    #logout-btn:hover {
+      background: #482673;
+      color: #fff;
+      border: 2px solid #482673;
+    }
+    #container {
+      display: flex;
+      flex-direction: row;
+      padding-top: 100px;
+      min-height: 100vh;
+    }
+    #notification-main-content {
+      flex: 1 1 0;
+      background-image: url("https://t4.ftcdn.net/jpg/03/05/14/31/360_F_305143126_Bf1ibYnBMEItIjiHFvpQPKPx7VQrWmEY.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 340px;
+      overflow-y: auto;
+      min-height: 230vh;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    .notification-header {
+      font-family: 'Soria', serif;
+      font-size: 2.15em;
+      font-weight: bold;
+      color: #482673;
+      padding: 32px 0 20px 0;
+      letter-spacing: 1.2px;
+      width: 98%;
+      max-width: 690px;
+      text-align: left;
+    }
+    .notification-options-row {
+      display: flex;
+      gap: 14px;
+      margin: 10px 0 24px 0;
+      width: 98%;
+      max-width: 700px;
+      font-family: 'Manrope', sans-serif;
+    }
+    .notification-btn {
+      padding: 10px 26px;
+      border-radius: 20px;
+      border: none;
+      background: #d7cffb;
+      font-size: 1.07em;
+      font-weight: bold;
+      color: #482673;
+      cursor: pointer;
+      transition: box-shadow 0.18s, background 0.18s, color 0.18s, transform 0.18s;
+      font-family: 'Manrope', sans-serif;
+      box-shadow: 0 1px 6px #ed0b7013;
+    }
+    .notification-btn.selected,
+    .notification-btn:hover {
+      background: #482673;
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 7px 22px #4cbfa622;
+    }
+    .notification-list {
+      width: 98%;
+      max-width: 700px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .notification-card {
+      background: #f6ebf4e9;
+      border-radius: 8px;
+      box-shadow: 0 1px 15px #48267310;
+      padding: 20px 28px 18px 24px;
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.09em;
+      color: #301008;
+      margin-bottom: 0;
+      border-left: 0 solid transparent;
+      transition: box-shadow 0.18s, background 0.18s, color 0.18s, transform 0.18s;
+    }
+    .notification-card:hover {
+      background: #fff;
+      box-shadow: 0 8px 40px #48267327;
+      transform: scale(1.015);
+    }
+    .notification-card.verified {
+      border-left: 6px solid #482673;
+    }
+    .notification-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #4cbfa619;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7em;
+      color: #482673;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 2.5px solid #482673;
+      box-shadow: 0 2px 10px #b2def522;
+      font-family: 'Soria', serif;
+    }
+    #right-sidebar {
+      width: 330px;
+      background: #fff;
+      padding: 36px 18px 18px 25px;
+      margin: 0 auto;
+      height: 230vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      border-left: 1px solid #dde3ea;
+    }
+    .section-box {
+      background: #f6ebf4;
+      border-radius: 18px;
+      padding: 20px 18px 18px 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 1px 8px #30100813;
+      font-family: 'Manrope', sans-serif;
+      transition: box-shadow 0.15s, transform 0.13s;
+    }
+    .section-box:hover {
+      box-shadow: 0 10px 28px #4cbfa622;
+      transform: scale(1.03);
+    }
+    .section-box h4 {
+      font-family: 'Soria', serif;
+      font-weight: bold;
+      color: #482673;
+      margin-bottom: 10px;
+      font-size: 1.14em;
+    }
+    .section-box p, .section-box b {
+      color: #301008;
+      font-size: 1em;
+      font-family: 'Manrope', sans-serif;
+    }
+    .feed-filter-section {
+      background: #d7cffb;
+      border-radius: 13px;
+      padding: 13px 18px;
+      margin-top: 19px;
+      font-family: 'Manrope', sans-serif;
+      box-shadow: 0 1px 8px #ed0b7013;
+      transition: box-shadow 0.15s, transform 0.12s;
+    }
+    .feed-filter-section:hover {
+      box-shadow: 0 8px 17px #4cbfa655;
+      transform: scale(1.02);
+    }
+    .feed-filter-section select {
+      background: #f6ebf4;
+      border-radius: 8px;
+      border: none;
+      padding: 7px 10px;
+      color: #482673;
+      font-weight: 600;
+      margin-top: 8px;
+      font-family: 'Manrope', sans-serif;
+      box-shadow: 0 1px 5px #ed0b7015;
+      transition: background 0.12s;
+      font-size: 1em;
+    }
+    .feed-filter-section select:focus {
+      outline: none;
+      background: #4cbfa610;
+    }
+     @media (max-width: 600px) {
+  #navbar {
+    display: none !important;
+  }
+  #right-sidebar {
+    display: none !important;
+  }
+  #main-content {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+  }
+  #container {
+    flex-direction: column;
+    padding-top: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+  }
+  body {
+    padding-top: 0 !important;
+  }
+}
+.notification-actions {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mark-btn {
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px solid #bda9f5;
+  background: #f6ebf4;
+  color: #482673;
+  font-size: 0.82em;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  box-shadow: 0 1px 4px #48267325;
+  letter-spacing: 0.3px;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.15s, border-color 0.18s;
+}
+
+.mark-btn:hover {
+  background: #482673;
+  color: #ffffff;
+  border-color: #482673;
+  box-shadow: 0 4px 14px #48267335;
+  transform: translateY(-1px);
+}
+
+.notification-card.read .mark-btn {
+  background: #e0d7ff;
+  color: #301008;
+  border-color: #c3b3ff;
+  box-shadow: none;
+}
+
+  </style>
+</head>
+<body>
+  <div id="navbar">
+    <div class="navbar-content">
+      <span class="navbar-logo">
+        <img src="plixy.png" alt="logo" style="width:120px;height:80px;">
+      </span>
+      <nav class="navbar-links">
+        <a class="navbar-link" href="home.html">Home</a>
+        <a class="navbar-link" href="explore.html">Explore</a>
+        <a class="navbar-link active" href="notifications.html">Notifications </a>
+        <a class="navbar-link" href="messages.html"> Messages </a>
+        <a class="navbar-link" href="community.html">Community & Collage</a>
+        <a class="navbar-link" href="profile.html">Profile</a>
+        <a class="navbar-link" href="settings.html">Settings</a>
+      </nav>
+      <button id="logout-btn">Logout</button>
+    </div>
+  </div>
+  <div id="container">
+    <div id="notification-main-content">
+      <div class="notification-header">
+      </div>
+      <div class="notification-options-row">
+        <button class="notification-btn selected">All Notifications</button>
+        <button class="notification-btn">Verified People</button>
+        <button class="notification-btn">Mentions</button>
+      </div>
+      <div class="notification-list">
+        <div class="notification-card">
+          <span class="notification-avatar">A</span>
+          <div>
+            <b>Musharrif </b> liked your post.<br>
+            <span style="color:#888; font-size:0.95em;">2m ago</span>
+          </div>
+        </div>
+        <div class="notification-card verified">
+          <span class="notification-avatar">V</span>
+          <div>
+            <b>DIA</b> commented on your collage!<br>
+            <span style="color:#888; font-size:0.95em;">11m ago</span>
+          </div>
+        </div>
+        <div class="notification-card">
+          <span class="notification-avatar">C</span>
+          <div>
+            <b>CreativePrachi</b> mentioned you in a post.<br>
+            <span style="color:#888; font-size:0.95em;">1h ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="right-sidebar">
+      <div class="section-box">
+        <h4>News You Might Like</h4>
+        <div style="display: flex; align-items: flex-start; gap: 17px; margin-bottom:15px;">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=70&h=70&fit=cover" alt="Exhibit Art" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>Vivid Minds Exhibit</b><br>
+            A new immersive art show opens in Berlin, blending digital and traditional media. <br>
+            <span style="color:#9b5de5;font-size:.9em;">11 min ago</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 17px; margin-bottom:15px;">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=70&h=70&fit=cover" alt="Sculpture Reveal" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>Skyline Sculpture Unveiled</b><br>
+            Urban artist Nala drops a 20-ft kinetic sculpture in NYC’s Central Park. <br>
+            <span style="color:#9b5de5;font-size:.9em;">Today</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 17px; margin-bottom:15px;">
+          <img src="https://images.unsplash.com/photo-1424746219973-8fe3bd07d8e3?w=70&h=70&fit=cover" alt="AI Art Panel" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>AI & Art Panel</b><br>
+            Global creators debate: “How much AI is too much in modern art?” <br>
+            <span style="color:#9b5de5;font-size:.9em;">1 hr ago</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 17px;">
+          <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?w=70&h=70&fit=cover" alt="Color Trends" style="width:70px;height:70px;border-radius:9px;object-fit:cover;">
+          <div>
+            <b>Color Trends Report</b><br>
+            2025’s top palette: Dreamy violets & fresh whites – trending now! <br>
+            <span style="color:#9b5de5;font-size:.9em;">Yesterday</span>
+          </div>
+        </div>
+      </div>
+      <div class="section-box">
+        <h4>People You Might Follow</h4>
+        <p><b>Dia Chowdhary</b> <span class="badge" style="background:#482673;">Trending</span></p>
+        <p><b>Prachi Aggarwal</b> <span class="badge" style="background:#482673;">Chatpati</span></p>
+        <p><b>Deepali Agarwal</b> <span class="badge" style="background:#482673;">Chat Lead</span></p>
+        <p><b>Anirudh Singh</b> <span class="badge" style="background:#482673;">Mentor</span></p>
+        <p><b>Priya Gupta</b> <span class="badge" style="background:#482673; color: #482673;">Art Pro</span></p>
+        <p><b>Mohit Saini</b> <span class="badge" style="background:#482673;">Newbie</span></p>
+        <p><b>Jaya Pillai</b> <span class="badge" style="background:#482673;">Collab Star</span></p>
+        <p><b>Kritika Jain</b> <span class="badge" style="background:#482673; color: #482673;">Storyteller</span></p>
+        <p><b>Aditya Bhardwaj</b> <span class="badge" style="background:#482673;">Part of SIH</span></p>
+        <p><b>Yash Verma</b> <span class="badge" style="background:#482673;">Nearby</span></p>
+      </div>
+      <div class="feed-filter-section">
+        <b>Feed Filters:</b>
+        <select>
+          <option>Trending</option>
+          <option>My Interests</option>
+          <option>Nearby Creators</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <script src="notifications.js"></script>
+</body>
+</html>

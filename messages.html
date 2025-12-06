@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chatter Art Connect — Settings</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Messages</title>
 <link href="https://fonts.googleapis.com/css?family=Soria:400,700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css?family=Manrope:400,700&display=swap" rel="stylesheet"/>
 <style>
@@ -147,7 +147,7 @@ body {
   padding-top: 100px;
   min-height: 100vh;
 }
-#settings-main-content {
+#messages-main-content {
   flex: 1 1 0;
   background-image: url("https://t4.ftcdn.net/jpg/03/05/14/31/360_F_305143126_Bf1ibYnBMEItIjiHFvpQPKPx7VQrWmEY.jpg");
   background-size: cover;
@@ -163,7 +163,7 @@ body {
   height: 100%;
   box-sizing: border-box;
 }
-.settings-header {
+.messages-header {
   font-family: 'Soria', serif;
   font-size: 2.15em;
   font-weight: bold;
@@ -174,55 +174,107 @@ body {
   max-width: 690px;
   text-align: left;
 }
-.settings-search-bar {
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 18px;
+.chat-thread-row {
+  display: flex;
+  gap: 14px;
+  margin: 10px 0 24px 0;
+  width: 98%;
   max-width: 700px;
-}
-.settings-search-bar input {
-  width: 100%;
-  padding: 13px;
-  border-radius: 18px;
-  border: 1px solid #e9ecef;
-  font-size: 1.13em;
-  outline: none;
-  background: #f5f5f7;
   font-family: 'Manrope', sans-serif;
 }
-.settings-option-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  width: 98%;
-  max-width: 650px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.settings-option {
-  padding: 13px 18px;
-  border-radius: 18px;
+.chat-thread-btn {
+  padding: 10px 26px;
+  border-radius: 20px;
+  border: none;
+  background: #d7cffb;
   font-size: 1.07em;
+  font-weight: bold;
   color: #482673;
   cursor: pointer;
-  font-weight: 700;
-  margin-bottom: 12px;
-  transition: background 0.18s, color 0.18s, transform 0.16s, box-shadow 0.16s;
-  display: flex; align-items: center; justify-content: left;
-  background: #f6ebf4e9;
-  box-shadow: 0 1px 11px #48267310;
   font-family: 'Manrope', sans-serif;
-  min-height: 44px;
-  width: 100%;
-  max-width: 650px;
+  transition: box-shadow 0.18s, background 0.18s, color 0.18s, transform 0.18s;
+  box-shadow: 0 1px 6px #ed0b7013;
+  white-space: nowrap;
 }
-.settings-option:hover,
-.settings-option.active {
+.chat-thread-btn.selected,
+.chat-thread-btn:hover {
   background: #482673;
-  color: white;
-  transform: scale(1.03);
-  box-shadow: 0 8px 30px #ed0b7025;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 7px 22px #4cbfa622;
+}
+.chat-list-container {
+  width: 98%;
+  max-width: 700px;
+  background: #f6ebf4e9;
+  border-radius: 8px;
+  box-shadow: 0 1px 15px #48267310;
+  border: none;
+  padding: 22px 32px;
+  margin-bottom: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  font-family: 'Manrope', sans-serif;
+  transition: box-shadow 0.18s, background 0.18s, color 0.18s, transform 0.18s;
+}
+.chat-list-container:hover {
+  background: #fff;
+  box-shadow: 0 8px 40px #48267327;
+}
+.chat-list-title {
+  font-family: 'Soria', serif;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #482673;
+  margin-bottom: 15px;
+}
+.chat-list-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.chat-list-item {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 16px;
+  border-radius: 14px;
+  transition: background 0.18s, transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+  font-size: 1.12em;
+  font-weight: 500;
+  margin-bottom: 8px;
+  background: #fff;
+  box-shadow: 0 1px 5px #ed0b7010;
+  color: #301008;
+  font-family: 'Manrope', sans-serif;
+}
+.chat-list-item:hover {
+  background: #f6ebf4;
+  box-shadow: 0 7px 18px #ed0b7015;
+  transform: scale(1.015);
+}
+.chat-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #4cbfa619;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  color: #482673;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 2.5px solid #482673;
+  box-shadow: 0 2px 10px #b2def522;
+  font-family: 'Soria', serif;
+}
+.last-seen {
+  font-size: 0.98em;
+  color: #858787;
+  font-style: italic;
+  margin-left: auto;
 }
 #right-sidebar {
   width: 330px;
@@ -290,67 +342,28 @@ body {
   outline: none;
   background: #4cbfa610;
 }
-.settings-panel {
-  font-size: 1.09em;
-  font-family: 'Manrope', sans-serif;
-  width: 100%;
-  max-width: 650px;
-  margin: 0 auto;
-}
-.settings-panel h3 {
-  font-family: 'Soria', serif;
-  font-size: 1.15em;
-  margin-top: 0;
-  margin-bottom: 12px;
-  color: #482673;
-}
-.settings-action {
-  margin: 10px 0;
-  padding: 13px 18px;
-  border-radius: 13px;
-  background: #f9fafc;
-  border: 1px solid #e0e8ea;
-  color: #482673;
-  font-weight: bold;
-  font-family: 'Manrope', sans-serif;
-  transition: background 0.18s, color 0.18s;
-  font-size: 1em;
-}
-.settings-action:hover {
-  background: #f6ebf4;
-  color: #482673;
-  box-shadow: 0 7px 18px #ed0b7015;
-}
-.logout-bottom-btn {
-  position: fixed;
-  right: 32px;
-  bottom: 30px;
-  z-index: 100;
-  padding: 13px 28px;
-  border-radius: 18px;
-  border: none;
-  background: #482673;
-  color: #fff;
-  font-size: 1.05em;
-  font-family: 'Manrope', sans-serif;
-  font-weight: bold;
-  box-shadow: 0 4px 17px #ed0b7025;
-  cursor: pointer;
-  transition: background 0.18s, box-shadow 0.18s, transform 0.15s;
-}
-.logout-bottom-btn:hover {
-  background: #321459;
-  box-shadow: 0 10px 22px #48267366;
-  transform: scale(1.05);
-}
-@media (max-width: 1150px) {
-  #right-sidebar { display: none; }
-  #settings-main-content, .settings-option-list { max-width: none;}
-  .logout-bottom-btn {
-    right: 16px;
-    bottom: 16px;
-    padding: 11px 18px;
-    font-size: 1em;
+ @media (max-width: 600px) {
+  #navbar {
+    display: none !important;
+  }
+  #right-sidebar {
+    display: none !important;
+  }
+  #main-content {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+  }
+  #container {
+    flex-direction: column;
+    padding-top: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+  }
+  body {
+    padding-top: 0 !important;
   }
 }
 </style>
@@ -364,39 +377,41 @@ body {
       <nav class="navbar-links">
         <a class="navbar-link" href="home.html">Home</a>
         <a class="navbar-link" href="explore.html">Explore</a>
-        <a class="navbar-link" href="notifications.html">Notifications  </a>
-        <a class="navbar-link" href="messages.html"> Messages </a>
+        <a class="navbar-link" href="notifications.html">Notifications </a>
+        <a class="navbar-link active" href="messages.html"> Messages </a>
         <a class="navbar-link" href="community.html">Community & Collage</a>
         <a class="navbar-link" href="profile.html">Profile</a>
-        <a class="navbar-link active" href="settings.html">Settings</a>
+        <a class="navbar-link" href="settings.html">Settings</a>
       </nav>
       <button id="logout-btn">Logout</button>
     </div>
   </div>
   <div id="container">
-    <div id="settings-main-content">
-      <div class="settings-header">Settings</div>
-      <div class="settings-search-bar">
-        <input type="text" placeholder="Search Settings">
+    <div id="messages-main-content">
+      <div class="messages-header"></div>
+      <div class="chat-thread-row">
+        <button class="chat-thread-btn selected">Followers</button>
+        <button class="chat-thread-btn">Following</button>
       </div>
-      <ul class="settings-option-list">
-        <li class="settings-option active">Your Account</li>
-        <li class="settings-option">Monetization</li>
-        <li class="settings-option">Premium</li>
-        <li class="settings-option">Creator</li>
-        <li class="settings-option">Dissubscription</li>
-        <li class="settings-option">Accessibility</li>
-        <li class="settings-option">Privacy & Safety</li>
-        <li class="settings-option">Notification</li>
-        <li class="settings-option">Help Center</li>
-        <li class="settings-option">Additional Resources</li>
-      </ul>
-      <div class="settings-panel">
-        <h3>Your Account</h3>
-        <div class="settings-action">Account Information</div>
-        <div class="settings-action">Change Password</div>
-        <div class="settings-action">Download Archives</div>
-        <div class="settings-action">Deactivate Your Account</div>
+      <div class="chat-list-container">
+        <div class="chat-list-title">Chats</div>
+        <ul class="chat-list-ul">
+          <li class="chat-list-item">
+            <span class="chat-avatar">M</span>
+            <span>Maisara</span>
+            <span class="last-seen">Last seen 20 min ago</span>
+          </li>
+          <li class="chat-list-item">
+            <span class="chat-avatar">K</span>
+            <span>Kavya</span>
+            <span class="last-seen">Last seen 2 hours ago</span>
+          </li>
+          <li class="chat-list-item">
+            <span class="chat-avatar">K</span>
+            <span>Koshi</span>
+            <span class="last-seen">Online</span>
+          </li>
+        </ul>
       </div>
     </div>
     <div id="right-sidebar">
@@ -440,6 +455,13 @@ body {
         <p><b>Dia Chowdhary</b> <span class="badge" style="background:#482673;">Trending</span></p>
         <p><b>Prachi Aggarwal</b> <span class="badge" style="background:#482673;">Chatpati</span></p>
         <p><b>Deepali Agarwal</b> <span class="badge" style="background:#482673;">Chat Lead</span></p>
+        <p><b>Anirudh Singh</b> <span class="badge" style="background:#482673;">Mentor</span></p>
+        <p><b>Priya Gupta</b> <span class="badge" style="background:#482673; color: #482673;">Art Pro</span></p>
+        <p><b>Mohit Saini</b> <span class="badge" style="background:#482673;">Newbie</span></p>
+        <p><b>Jaya Pillai</b> <span class="badge" style="background:#482673;">Collab Star</span></p>
+        <p><b>Kritika Jain</b> <span class="badge" style="background:#482673; color: #482673;">Storyteller</span></p>
+        <p><b>Aditya Bhardwaj</b> <span class="badge" style="background:#482673;">Part of SIH</span></p>
+        <p><b>Yash Verma</b> <span class="badge" style="background:#482673;">Nearby</span></p>
       </div>
       <div class="feed-filter-section">
         <b>Feed Filters:</b>
@@ -451,6 +473,6 @@ body {
       </div>
     </div>
   </div>
-  <button class="logout-bottom-btn">Log Out</button>
+  <script src="messages.js"></script>
 </body>
 </html>
