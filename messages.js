@@ -1,6 +1,3 @@
-// ===============================
-// 1. NAVBAR ACTIVE STATE
-// ===============================
 const navLinks = document.querySelectorAll('.navbar-link');
 
 navLinks.forEach(link => {
@@ -9,13 +6,7 @@ navLinks.forEach(link => {
     event.target.classList.add('active');
   });
 });
-
-
-// ===============================
-// 2. CHAT DATA MODEL
-// ===============================
 const chats = [
-  // Followers
   {
     id: 1,
     name: 'Maisara',
@@ -37,7 +28,6 @@ const chats = [
     lastSeen: 'Online',
     group: 'Followers'
   },
-  // Following
   {
     id: 4,
     name: 'Dia',
@@ -53,20 +43,10 @@ const chats = [
     group: 'Following'
   }
 ];
-
-
-// ===============================
-// 3. DOM REFERENCES
-// ===============================
 const chatThreadButtons = document.querySelectorAll('.chat-thread-btn');
 const chatListContainer = document.querySelector('.chat-list-container');
 const chatListTitle = document.querySelector('.chat-list-title');
 const chatListUl = document.querySelector('.chat-list-ul');
-
-
-// ===============================
-// 4. RENDER FUNCTION
-// ===============================
 function renderChats(groupLabel = 'Followers') {
   chatListTitle.textContent = groupLabel + ' Chats';
 
@@ -81,29 +61,17 @@ function renderChats(groupLabel = 'Followers') {
   `).join('');
 }
 
-// Initial render (Followers)
 renderChats('Followers');
 
-
-// ===============================
-// 5. TOGGLE FOLLOWERS / FOLLOWING
-// ===============================
 chatThreadButtons.forEach(btn => {
   btn.addEventListener('click', function () {
-    // Visual state
     chatThreadButtons.forEach(b => b.classList.remove('selected'));
     this.classList.add('selected');
 
-    const label = this.textContent.trim(); // 'Followers' or 'Following'
+    const label = this.textContent.trim(); 
     renderChats(label);
   });
 });
-
-
-// ===============================
-// 6. CLICK CHAT ITEM → SIMPLE ACTION
-// ===============================
-// Shows an alert with name and last seen (basic function + event)
 chatListUl.addEventListener('click', function (event) {
   const li = event.target.closest('.chat-list-item');
   if (!li) return;

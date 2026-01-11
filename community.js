@@ -1,6 +1,3 @@
-// ===============================
-// 1. NAVBAR ACTIVE STATE
-// ===============================
 const navLinks = document.querySelectorAll('.navbar-link');
 
 navLinks.forEach(link => {
@@ -9,12 +6,6 @@ navLinks.forEach(link => {
     event.target.classList.add('active');
   });
 });
-
-
-// ===============================
-// 2. TOGGLE COMMUNITY / COLLAGE SECTIONS
-// ===============================
-
 const communitiesBtn = document.getElementById('communities-btn');
 const collageBtn = document.getElementById('collage-btn');
 const communitiesSection = document.getElementById('communities-section');
@@ -35,16 +26,7 @@ function showSection(sectionName) {
     communitiesBtn.classList.remove('selected');
   }
 }
-
-// Ensure default state on load
 showSection('communities');
-
-
-// ===============================
-// 3. SIMPLE COMMUNITY CLICK ACTIONS
-// ===============================
-
-// Data model for communities (for future extension)
 const myCommunities = [
   { name: 'Art Lovers', type: 'joined' },
   { name: 'Indie Musicians', type: 'joined' },
@@ -59,8 +41,6 @@ const recommendedCommunities = [
 
 const joinedList = document.querySelector('.community-list');
 const recommendedList = document.querySelector('.recommended-list');
-
-// Click → small alert to show interaction
 joinedList.addEventListener('click', function (event) {
   const item = event.target.closest('.community-list-item');
   if (!item) return;
@@ -74,17 +54,10 @@ recommendedList.addEventListener('click', function (event) {
   const name = item.innerText.trim();
   alert('Request to join community: ' + name);
 });
-
-
-// ===============================
-// 4. COLLAGE "JOIN & EDIT" BUTTON
-// ===============================
-
 const joinCollageBtn = collageSection.querySelector('button');
 const collagePreviewBox = document.querySelector('.collage-preview-box');
 
 joinCollageBtn.addEventListener('click', function () {
-  // Basic demo: change caption text inside preview box
   const span = collagePreviewBox.querySelector('span');
   if (span) {
     span.textContent = 'You joined the collage room! (Demo edit applied)';

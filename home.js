@@ -1,7 +1,3 @@
-// ===============================
-// 1. DATA MODELS (ARRAYS + OBJECTS)
-// ===============================
-
 const posts = [
   {
     id: 1,
@@ -60,24 +56,10 @@ const posts = [
     dislikedByUser: false
   }
 ];
-
-
-// ===============================
-// 2. DOM ELEMENT REFERENCES
-// ===============================
-
 const postsFeed = document.querySelector('.posts-feed');
 const filterSelect = document.querySelector('.feed-filter-section select');
-const searchBar = document.querySelector('.main-search-bar');
 const navLinks = document.querySelectorAll('.navbar-link');
 const postBtnNav = document.getElementById('postBtnNav');
-
-
-// ===============================
-// 3. RENDERING FUNCTIONS
-// ===============================
-
-// Render given posts into the feed
 function renderPosts(postArray = posts) {
   postsFeed.innerHTML = postArray.map(post => `
     <div class="post-card">
@@ -110,30 +92,17 @@ function renderPosts(postArray = posts) {
     </div>
   `).join('');
 }
-
-// Initial render
 renderPosts();
-
-
-// ===============================
-// 4. INTERACTION LOGIC
-// ===============================
-
-// Toggle like: click once = +1 like, click again = remove like
 function toggleLike(id) {
   const post = posts.find(p => p.id === id);
   if (!post) return;
 
   if (post.likedByUser) {
-    // Already liked → undo like
     post.likes -= 1;
     post.likedByUser = false;
   } else {
-    // Add like
     post.likes += 1;
     post.likedByUser = true;
-
-    // If user had disliked, remove that
     if (post.dislikedByUser) {
       post.dislikes -= 1;
       post.dislikedByUser = false;
@@ -142,22 +111,16 @@ function toggleLike(id) {
 
   renderPosts();
 }
-
-// Toggle dislike: same behavior for dislikes
 function toggleDislike(id) {
   const post = posts.find(p => p.id === id);
   if (!post) return;
 
   if (post.dislikedByUser) {
-    // Already disliked → undo dislike
     post.dislikes -= 1;
     post.dislikedByUser = false;
   } else {
-    // Add dislike
     post.dislikes += 1;
     post.dislikedByUser = true;
-
-    // If user had liked, remove that
     if (post.likedByUser) {
       post.likes -= 1;
       post.likedByUser = false;
@@ -166,41 +129,18 @@ function toggleDislike(id) {
 
   renderPosts();
 }
-
-// Filter posts by dropdown category
 function filterPosts() {
-  const filterValue = filterSelect.value; // 'Trending', 'My Interests', 'Nearby Creators'
+  const filterValue = filterSelect.value; 
   const filtered = posts.filter(post => post.category === filterValue);
   renderPosts(filtered);
 }
-
-// Search posts by username or text
-function searchPosts() {
-  const query = searchBar.value.toLowerCase();
-  const filtered = posts.filter(post =>
-    post.username.toLowerCase().includes(query) ||
-    post.text.toLowerCase().includes(query)
-  );
-  renderPosts(filtered);
-}
-
-// Navbar active state
 function handleNavClick(event) {
   navLinks.forEach(link => link.classList.remove('active'));
   event.target.classList.add('active');
 }
-
-// Simple demo handler for "+ Post" button
 function handleNewPostClick() {
-  alert('Post creation coming soon!'); // basic alert usage
+  alert('Post creation coming soon!');
 }
-
-
-// ===============================
-// 5. EVENT LISTENERS
-// ===============================
-
 filterSelect.addEventListener('change', filterPosts);
-searchBar.addEventListener('input', searchPosts);
 navLinks.forEach(link => link.addEventListener('click', handleNavClick));
 postBtnNav.addEventListener('click', handleNewPostClick);
